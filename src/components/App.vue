@@ -15,10 +15,10 @@
       <nav>
         <router-link to="/">Planner</router-link>
         <router-link to="/saved">Saved</router-link>
-        <router-link to="/import">Import</router-link>
-        <router-link to="/builds">Builds</router-link>
-        <router-link to="/changelog">Changelog</router-link>
-        <router-link to="/about">About</router-link>
+        <!-- <router-link to="/import">Import</router-link> -->
+        <!-- <router-link to="/builds">Builds</router-link> -->
+        <!-- <router-link to="/changelog">Changelog</router-link> -->
+        <!-- <router-link to="/about">About</router-link> -->
       </nav>
       <button
         aria-label="Toggle theme between dark and light"
