@@ -31,8 +31,11 @@
     </main>
     <footer>
       <div>
-        This website created with Malar Zhapaj by
-        <a href="https://github.com/amoeba">Kolth</a>
+        Made with Malar Zhapaj by the <a href="https://daralet.ac">Daralet Team</a>.
+      </div>
+      <div>
+        The original <a href="https://planner.treestats.net">Overly-Detailed Asheron's Call Character Planner</a> was built
+        by <a href="https://github.com/amoeba">Kolth</a>. Thank you for all you've done for the community.
       </div>
     </footer>
   </div>
