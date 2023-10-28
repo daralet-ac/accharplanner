@@ -146,12 +146,10 @@
         </div>
       </div>
     </div>
-    <ExtraSkillCredits class="header" />
   </div>
 </template>
 
 <script>
-import ExtraSkillCredits from "./ExtraSkillCredits.vue";
 import {
   MIN_LEVEL,
   MAX_LEVEL,
@@ -162,7 +160,6 @@ import { Race } from "../types";
 export default {
   name: "Headers",
   components: {
-    ExtraSkillCredits,
   },
   data() {
     return {
@@ -179,9 +176,6 @@ export default {
     },
     knobsAndDialsPaneVisible() {
       return this.$store.getters.knobsAndDialsPaneVisible;
-    },
-    extraSkillCreditsPaneVisible() {
-      return this.$store.getters.extraSkillCreditsPaneVisible;
     },
     totalXPEarned() {
       return Number(this.$store.getters.totalXPEarned).toLocaleString();
@@ -266,9 +260,6 @@ export default {
     },
     toggleKnobsAndDialsPane() {
       this.$store.commit("toggleKnobsAndDialsPane");
-    },
-    toggleExtraSkillCreditsPane() {
-      this.$store.commit("toggleExtraSkillCreditsPane");
     },
     updateLevel(e) {
       let actual = Math.round(Number(e.target.value));

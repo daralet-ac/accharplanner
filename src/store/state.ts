@@ -18,7 +18,6 @@ let state: State = {
       character: true,
       xp: true,
       knobsAndDials: true,
-      extraSkillCredits: true,
     },
     modalVisibility: {
       share: false,

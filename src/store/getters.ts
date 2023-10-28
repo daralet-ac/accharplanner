@@ -56,9 +56,6 @@ export default {
   knobsAndDialsPaneVisible: (state: State) => {
     return state.ui.paneVisibility.knobsAndDials;
   },
-  extraSkillCreditsPaneVisible: (state: State) => {
-    return state.ui.paneVisibility.extraSkillCredits;
-  },
   // General
   shareStatus: (state: State) => {
     return state.ui.shareStatus;
@@ -205,11 +202,7 @@ export default {
   },
 
   skillPointsAvailable: (state: State) => {
-    return (
-      SKILL_POINTS_AT_LEVEL[state.build.character.level] +
-      (state.build.character.extraSkillCredits.railrea ? 1 : 0) +
-      (state.build.character.extraSkillCredits.oswald ? 1 : 0)
-    );
+    return SKILL_POINTS_AT_LEVEL[state.build.character.level];
   },
 
   skillPointsSpent: function (state: State): number {

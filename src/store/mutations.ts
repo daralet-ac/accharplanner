@@ -63,10 +63,6 @@ export default {
     state.ui.paneVisibility.knobsAndDials =
       !state.ui.paneVisibility.knobsAndDials;
   },
-  toggleExtraSkillCreditsPane(state: State) {
-    state.ui.paneVisibility.extraSkillCredits =
-      !state.ui.paneVisibility.extraSkillCredits;
-  },
   changeStage(state: State, index: number) {
     state.ui.currentStage = index;
     state.build.character = JSON.parse(
@@ -164,10 +160,6 @@ export default {
   },
   updateGender(state: State, value: Gender) {
     state.build.character.gender = value;
-  },
-
-  updateExtraSkillCredit(state: State, payload: any) {
-    state.build.character.extraSkillCredits[payload.name] = payload.value;
   },
 
   updateItem(state: State, payload: any) {

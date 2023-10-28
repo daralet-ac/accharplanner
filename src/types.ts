@@ -11,7 +11,6 @@ export interface Character {
   race: string;
   gender: string;
   level: number;
-  extraSkillCredits: any;
   attributes: any;
   vitals: any;
   skills: any;
@@ -47,7 +46,6 @@ export interface PaneVisibility {
   character: boolean;
   xp: boolean;
   knobsAndDials: boolean;
-  extraSkillCredits: boolean;
 }
 
 export interface ModalVisibility {
