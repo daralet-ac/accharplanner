@@ -179,36 +179,8 @@ export const filterText = function (
   );
 };
 
-export const updateAugmentationInvestedSideEffect = function (
-  state: any,
-  payload: any,
-  attribute: string
-) {
-  if (
-    state.build.character.attributes[attribute].creation <
-    MAX_CREATION_ATTRIBUTE_POINTS
-  ) {
-    const diff =
-      payload.value -
-      state.build.character.augmentations[payload.name].invested;
-    let newVal =
-      state.build.character.attributes[attribute].creation + diff * 5;
-
-    if (newVal > MAX_CREATION_ATTRIBUTE_POINTS) {
-      newVal = MAX_CREATION_ATTRIBUTE_POINTS;
-    } else if (newVal < MIN_CREATION_ATTRIBUTE_POINTS) {
-      newVal = MIN_CREATION_ATTRIBUTE_POINTS;
-    }
-
-    state.build.character.attributes[attribute].creation = newVal;
-  }
-};
-
 export const maxSkillInvested = (training: Training) => {
-  if (training === Training.SPECIALIZED)
-    return MAX_SKILL_INVESTED_SPECIALIZED;
-  else if (training === Training.TRAINED)
-    return MAX_SKILL_INVESTED_TRAINED;
-  else
-    return 0;
+  if (training === Training.SPECIALIZED) return MAX_SKILL_INVESTED_SPECIALIZED;
+  else if (training === Training.TRAINED) return MAX_SKILL_INVESTED_TRAINED;
+  else return 0;
 };

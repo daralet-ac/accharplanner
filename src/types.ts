@@ -14,7 +14,6 @@ export interface Character {
   attributes: any;
   vitals: any;
   skills: any;
-  augmentations: any;
   items: any;
   armor_sets: any;
 }
@@ -39,7 +38,6 @@ export interface SavedBuild {
 export interface PaneVisibility {
   attributes: boolean;
   skills: boolean;
-  augmentations: boolean;
   items: boolean;
   armor_sets: boolean;
   buildStages: boolean;
@@ -160,54 +158,6 @@ export enum Training {
   UNTRAINED = "untrained",
   TRAINED = "trained",
   SPECIALIZED = "specialized",
-}
-
-// Incomplete
-export enum Augmentation {
-  might_of_the_seventh_mule = "might_of_the_seventh_mule",
-  shadow_of_the_seventh_mule = "shadow_of_the_seventh_mule",
-  infused_war_magic = "infused_war_magic",
-  infused_life_magic = "infused_life_magic",
-  infused_item_magic = "infused_item_magic",
-  infused_creature_magic = "infused_creature_magic",
-  infused_void_magic = "infused_void_magic",
-  clutch_of_the_miser = "clutch_of_the_miser",
-  enduring_enchantment = "enduring_enchantment",
-  quick_learner = "quick_learner",
-  asherons_lesser_benediction = "asherons_lesser_benediction",
-  asherons_benediction = "asherons_benediction",
-  blackmoors_favor = "blackmoors_favor",
-  innate_renewal = "innate_renewal",
-  reinforcement_of_the_lugians = "reinforcement_of_the_lugians",
-  bleearghs_fortitude = "bleearghs_fortitude",
-  oswalds_enhancement = "oswalds_enhancement",
-  siraluuns_blessing = "siraluuns_blessing",
-  enduring_calm = "enduring_calm",
-  steadfast_will = "steadfast_will",
-  enhancement_of_the_mace_turner = "enhancement_of_the_mace_turner",
-  enhancement_of_the_blade_turner = "enhancement_of_the_blade_turner",
-  enhancement_of_the_arrow_turner = "enhancement_of_the_arrow_turner",
-  storms_enhancement = "storms_enhancement",
-  fiery_enhancement = "fiery_enhancement",
-  icy_enhancement = "icy_enhancement",
-  caustic_enhancement = "caustic_enhancement",
-  critical_protection = "critical_protection",
-  frenzy_of_the_slayer = "frenzy_of_the_slayer",
-  iron_skin_of_the_invincible = "iron_skin_of_the_invincible",
-  eye_of_the_remorseless = "eye_of_the_remorseless",
-  hand_of_the_remorseless = "hand_of_the_remorseless",
-  ciandras_fortune = "ciandras_fortune",
-  charmed_smith = "charmed_smith",
-  jibrils_essence = "jibrils_essence",
-  yoshis_essence = "yoshis_essence",
-  celdiseths_essence = "celdiseths_essence",
-  kogas_essence = "kogas_essence",
-  ciandras_essence = "ciandras_essence",
-  master_of_the_steel_circle = "master_of_the_steel_circle",
-  master_of_the_five_fold_path = "master_of_the_five_fold_path",
-  master_of_the_focused_eye = "master_of_the_focused_eye",
-  jack_of_all_trades = "jack_of_all_trades",
-  archmages_endurance = "archmages_endurance",
 }
 
 export enum Item {

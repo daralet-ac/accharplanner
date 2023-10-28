@@ -10,7 +10,7 @@
           &nbsp;
           <span
             v-tooltip="
-              'Character creation attribute points spent. Increased from the base of 330 by the +5 attribute points experience augmentations to a maximum of 380.'
+              'Character creation attribute points spent.'
             "
             >{{ attributePointsSpent }} / {{ attributePointsAvailable }}</span
           >

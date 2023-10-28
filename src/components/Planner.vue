@@ -103,7 +103,6 @@
     <div class="row panes">
       <AttributesAndVitals />
       <Skills />
-      <Augmentations />
       <Items />
       <ArmorSets />
     </div>
@@ -117,7 +116,6 @@ import ShareModal from "./ShareModal.vue";
 import Headers from "./Headers.vue";
 import AttributesAndVitals from "./AttributesAndVitals.vue";
 import Skills from "./Skills.vue";
-import Augmentations from "./Augmentations.vue";
 import Items from "./Items.vue";
 import ArmorSets from "./ArmorSets.vue";
 import { exportCharacter } from "../helpers";
@@ -131,7 +129,6 @@ export default {
     Headers,
     AttributesAndVitals,
     Skills,
-    Augmentations,
     Items,
     ArmorSets,
   },

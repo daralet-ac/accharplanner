@@ -3,12 +3,6 @@
     <div>
       <div class="pane-header" v-on:click="toggle">
         <div>
-                    <span
-            class="tip"
-            v-tooltip="
-              'Skill levels may be higher than what you see ingame because some augmentations and auras (i.e., Master of the* and World) don\'t increase the levels shown on your character sheet while still having an effect during skill checks. The levels shown here are the effective level.'
-            "
-            >!</span>&nbsp;
           <h3>Skills</h3>
 
           <span class="red">{{ skillPointsSpentErrorText }}</span>
@@ -85,7 +79,6 @@
                 <span v-tooltip="'You are limited to 70 total credits specialized. Specialized skills get a 10 point bonus.'">
                   Specialized ({{ specializedSkillPointsSpent }} /
                   {{ maxSpecializedSkillPointsSpent }})
-                  {{ augmentationsRequiredText }}
                 </span>
               </th>
               <th>&nbsp;</th>
@@ -197,18 +190,6 @@ export default {
       }
 
       return "";
-    },
-    augmentationsRequired() {
-      return this.$store.getters.augmentationsSpent;
-    },
-    augmentationsRequiredText() {
-      if (this.$store.getters.augmentationsSpent == 0) {
-        return "";
-      } else if (this.$store.getters.augmentationsSpent == 1) {
-        return "1 aug required";
-      } else {
-        return this.$store.getters.augmentationsSpent + " augs required";
-      }
     },
     specializedSkills() {
       let collection = Object.keys(this.$store.state.build.character.skills)

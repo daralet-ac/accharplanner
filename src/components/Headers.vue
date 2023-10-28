@@ -206,9 +206,6 @@ export default {
     skillPointsAvailable() {
       return this.$store.getters.skillPointsAvailable;
     },
-    augmentationsSpent() {
-      return this.$store.getters.augmentationsSpent;
-    },
     requiredLevel() {
       return this.$store.getters.requiredLevel;
     },

@@ -1,6 +1,4 @@
 import {
-  AUGMENTATIONS,
-  AUGMENTATION_MAX_USES,
   UNTRAINED_STATE,
   MAX_CREATION_ATTRIBUTE_TOTAL_POINTS,
   MAX_SKILL_INVESTED_TRAINED,
@@ -9,10 +7,7 @@ import {
   MAX_SKILL_INVESTED_SPECIALIZED,
   MAX_LEVEL,
 } from "../constants";
-import {
-  updateAugmentationInvestedSideEffect,
-  maxSkillInvested,
-} from "../helpers";
+import { maxSkillInvested } from "../helpers";
 import {
   State,
   Race,
@@ -21,7 +16,6 @@ import {
   Vital,
   Skill,
   Training,
-  Augmentation,
 } from "../types";
 import DefaultCharacter from "./DefaultCharacter";
 
@@ -39,10 +33,6 @@ export default {
   },
   toggleSkillsPane(state: State) {
     state.ui.paneVisibility.skills = !state.ui.paneVisibility.skills;
-  },
-  toggleAugmentationsPane(state: State) {
-    state.ui.paneVisibility.augmentations =
-      !state.ui.paneVisibility.augmentations;
   },
   toggleItemsPane(state: State) {
     state.ui.paneVisibility.items = !state.ui.paneVisibility.items;
@@ -119,44 +109,6 @@ export default {
   },
   updateRace(state: State, value: Race) {
     state.build.character.race = value;
-
-    // Also update experience augmentations to match new race
-    if (
-      value === Race.Aluvian ||
-      value === Race["Gharu'ndim"] ||
-      value === Race.Sho ||
-      value === Race.Viamontian
-    ) {
-      state.build.character.augmentations.jack_of_all_trades.invested = 1;
-      state.build.character.augmentations.infused_life_magic.invested = 0;
-      state.build.character.augmentations.eye_of_the_remorseless.invested = 0;
-      state.build.character.augmentations.might_of_the_seventh_mule.invested = 0;
-      state.build.character.augmentations.hand_of_the_remorseless.invested = 0;
-    } else if (value === Race.Empyrean) {
-      state.build.character.augmentations.jack_of_all_trades.invested = 0;
-      state.build.character.augmentations.infused_life_magic.invested = 1;
-      state.build.character.augmentations.eye_of_the_remorseless.invested = 0;
-      state.build.character.augmentations.might_of_the_seventh_mule.invested = 0;
-      state.build.character.augmentations.hand_of_the_remorseless.invested = 0;
-    } else if (value === Race.Umbraen || value === Race.Penumbraen) {
-      state.build.character.augmentations.jack_of_all_trades.invested = 0;
-      state.build.character.augmentations.infused_life_magic.invested = 0;
-      state.build.character.augmentations.eye_of_the_remorseless.invested = 1;
-      state.build.character.augmentations.might_of_the_seventh_mule.invested = 0;
-      state.build.character.augmentations.hand_of_the_remorseless.invested = 0;
-    } else if (value === Race.Lugian) {
-      state.build.character.augmentations.jack_of_all_trades.invested = 0;
-      state.build.character.augmentations.infused_life_magic.invested = 0;
-      state.build.character.augmentations.eye_of_the_remorseless.invested = 0;
-      state.build.character.augmentations.might_of_the_seventh_mule.invested = 1;
-      state.build.character.augmentations.hand_of_the_remorseless.invested = 0;
-    } else if (value === Race.Tumerok) {
-      state.build.character.augmentations.jack_of_all_trades.invested = 0;
-      state.build.character.augmentations.infused_life_magic.invested = 0;
-      state.build.character.augmentations.eye_of_the_remorseless.invested = 0;
-      state.build.character.augmentations.might_of_the_seventh_mule.invested = 0;
-      state.build.character.augmentations.hand_of_the_remorseless.invested = 1;
-    }
   },
   updateGender(state: State, value: Gender) {
     state.build.character.gender = value;
@@ -197,17 +149,7 @@ export default {
     // Use this to iterate over the other attributes we're lowering by name
     let names = Object.keys(Attribute).filter((v) => v !== payload.name);
 
-    let maxAttributePoints =
-      MAX_CREATION_ATTRIBUTE_TOTAL_POINTS +
-      state.build.character.augmentations.reinforcement_of_the_lugians
-        .invested *
-        5 +
-      state.build.character.augmentations.bleearghs_fortitude.invested * 5 +
-      state.build.character.augmentations.oswalds_enhancement.invested * 5 +
-      state.build.character.augmentations.siraluuns_blessing.invested * 5 +
-      state.build.character.augmentations.enduring_calm.invested * 5 +
-      state.build.character.augmentations.steadfast_will.invested * 5;
-
+    let maxAttributePoints = MAX_CREATION_ATTRIBUTE_TOTAL_POINTS;
     if (newSpent > maxAttributePoints) {
       let extra = newSpent - maxAttributePoints;
 
@@ -314,74 +256,6 @@ export default {
     }
 
     state.build.character.skills[skill].training = newTraining;
-  },
-
-  // Augmentations
-  updateAugmentationInvested(state: State, payload: any) {
-    /*
-      Update Attributes
-
-      The basic idea here is that changing an attribute augmentation direclty
-      just boosts your total available attribute points, up to a maximum of
-      380 (330 + 50, 5 uses of +10 points). How I used to do this was add each
-      attribute augmentation directly into the base value for each attribute.
-      This produced a correct value _until_ the player went through attribute
-      redistribution. Using the attribute redistribution quest, a player can do
-      something like get 5 endurance augmentations and later redistribute those
-      bonus attribute points to another attribute.
-
-      To simulate what it was like when a player initial gained an attribute
-      augmentation, we attempt to boost the attribute's base value as a side
-      effect of this mutation.
-
-      We do this before updating state so we can calculate the difference.
-    */
-
-    if (payload.name === Augmentation.reinforcement_of_the_lugians) {
-      updateAugmentationInvestedSideEffect(state, payload, Attribute.strength);
-    } else if (payload.name === Augmentation.bleearghs_fortitude) {
-      updateAugmentationInvestedSideEffect(state, payload, Attribute.endurance);
-    } else if (payload.name === Augmentation.oswalds_enhancement) {
-      updateAugmentationInvestedSideEffect(
-        state,
-        payload,
-        Attribute.coordination
-      );
-    } else if (payload.name === Augmentation.siraluuns_blessing) {
-      updateAugmentationInvestedSideEffect(state, payload, Attribute.quickness);
-    } else if (payload.name === Augmentation.enduring_calm) {
-      updateAugmentationInvestedSideEffect(state, payload, Attribute.focus);
-    } else if (payload.name === Augmentation.steadfast_will) {
-      updateAugmentationInvestedSideEffect(state, payload, Attribute.self);
-    }
-
-    state.build.character.augmentations[payload.name].invested = Number(
-      payload.value
-    );
-
-    /* Update skills */
-    if (payload.name === Augmentation.jibrils_essence) {
-      state.build.character.skills.armor_tinkering.training =
-        Training.SPECIALIZED;
-    } else if (payload.name === Augmentation.yoshis_essence) {
-      state.build.character.skills.item_tinkering.training =
-        Training.SPECIALIZED;
-    } else if (payload.name === Augmentation.celdiseths_essence) {
-      state.build.character.skills.magic_item_tinkering.training =
-        Training.SPECIALIZED;
-    } else if (payload.name === Augmentation.kogas_essence) {
-      state.build.character.skills.weapon_tinkering.training =
-        Training.SPECIALIZED;
-    } else if (payload.name === Augmentation.ciandras_essence) {
-      state.build.character.skills.salvaging.training = Training.SPECIALIZED;
-    }
-  },
-
-  changeAllAugmentationInvestment(state: State, value: number) {
-    AUGMENTATIONS.forEach((aug_name: string) => {
-      state.build.character.augmentations[aug_name].invested =
-        value == 1 ? AUGMENTATION_MAX_USES[aug_name] : 0;
-    });
   },
 
   changeAllInvestment(state: State, invested: string) {
