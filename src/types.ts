@@ -17,7 +17,6 @@ export interface Character {
   vitals: any;
   skills: any;
   augmentations: any;
-  luminance_auras: any;
   items: any;
   armor_sets: any;
 }
@@ -43,12 +42,11 @@ export interface PaneVisibility {
   attributes: boolean;
   skills: boolean;
   augmentations: boolean;
-  auras: boolean;
   items: boolean;
   armor_sets: boolean;
   buildStages: boolean;
   character: boolean;
-  xpAndLuminance: boolean;
+  xp: boolean;
   knobsAndDials: boolean;
   extraSkillCredits: boolean;
 }
@@ -168,23 +166,6 @@ export enum Training {
 }
 
 // Incomplete
-export enum PropertyInt {
-  LumAugDamageRating = "333",
-  LumAugDamageReductionRating = "334",
-  LumAugCritDamageRating = "335",
-  LumAugCritReductionRating = "336",
-  LumAugSurgeEffectRating = "337",
-  LumAugSurgeChanceRating = "338",
-  LumAugItemManaUsage = "339",
-  LumAugItemManaGain = "340",
-  LumAugVitality = "341",
-  LumAugHealingRating = "342",
-  LumAugSkilledCraft = "343",
-  LumAugSkilledSpec = "344",
-  LumAugNoDestroyCraft = "345",
-  LumAugAllSkills = "365",
-}
-
 export enum Augmentation {
   might_of_the_seventh_mule = "might_of_the_seventh_mule",
   shadow_of_the_seventh_mule = "shadow_of_the_seventh_mule",
@@ -230,25 +211,6 @@ export enum Augmentation {
   master_of_the_focused_eye = "master_of_the_focused_eye",
   jack_of_all_trades = "jack_of_all_trades",
   archmages_endurance = "archmages_endurance",
-}
-
-export enum LuminanceAura {
-  aetheric_vision = "aetheric_vision",
-  craftsman = "craftsman",
-  glory = "glory",
-  mana_flow = "mana_flow",
-  mana_infusion = "mana_infusion",
-  protection = "protection",
-  purity = "purity",
-  skill = "skill",
-  temperance = "temperance",
-  valor = "valor",
-  world = "world",
-  specialization = "specialization",
-  invulnerability = "invulnerability",
-  destruction = "destruction",
-  retribution = "retribution",
-  hardening = "hardening",
 }
 
 export enum Item {

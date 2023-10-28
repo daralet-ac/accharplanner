@@ -3,7 +3,6 @@ import {
   Vital,
   Skill,
   Augmentation,
-  LuminanceAura,
   Item,
   ArmorSet,
   NumberIndexedDict,
@@ -221,49 +220,6 @@ export const AUGMENTATION_EXTRA_INFO = {
   [Augmentation.master_of_the_focused_eye]: "+10 Missile Skill",
   [Augmentation.jack_of_all_trades]: "+5 All Skills",
   [Augmentation.archmages_endurance]: "+20% Spell Duration",
-};
-
-export const LUMINANCE_AURA_NAME = {
-  [LuminanceAura.aetheric_vision]: "Aetheric Vision",
-  [LuminanceAura.craftsman]: "Craftsman",
-  [LuminanceAura.glory]: "Glory",
-  [LuminanceAura.mana_flow]: "Mana Flow",
-  [LuminanceAura.mana_infusion]: "Mana Infusion",
-  [LuminanceAura.protection]: "Protection",
-  [LuminanceAura.purity]: "Purity",
-  [LuminanceAura.skill]: "Skill",
-  [LuminanceAura.temperance]: "Temperance",
-  [LuminanceAura.valor]: "Valor",
-  [LuminanceAura.world]: "World",
-  [LuminanceAura.specialization]: "Specialization",
-  [LuminanceAura.invulnerability]: "Invulnerability",
-  [LuminanceAura.destruction]: "Destruction",
-  [LuminanceAura.retribution]: "Retribution",
-  [LuminanceAura.hardening]: "Hardening",
-};
-
-export const LUMINANCE_AURA_HOVER_INFO = {
-  [LuminanceAura.craftsman]:
-    "Doesn't change values in your character sheet and is only applied when crafting/tinkering.",
-};
-
-export const LUMINANCE_AURA_EXTRA_INFO = {
-  [LuminanceAura.aetheric_vision]: "+ Surge %",
-  [LuminanceAura.craftsman]: "+1 to Craft/Tink",
-  [LuminanceAura.glory]: "+1 Crit Dmg",
-  [LuminanceAura.mana_flow]: "- Mana Consum.",
-  [LuminanceAura.mana_infusion]: "+ Mana Stone",
-  [LuminanceAura.protection]: "+1 Dmg Red.",
-  [LuminanceAura.purity]: "+ Healing Amount",
-  [LuminanceAura.skill]: "+1 Skill Credit",
-  [LuminanceAura.temperance]: "+1 Crit Dmg Red.",
-  [LuminanceAura.valor]: "+1 Dmg",
-  [LuminanceAura.world]: "+1 All Skills",
-  [LuminanceAura.specialization]: "+2 to Spec Skills",
-  [LuminanceAura.invulnerability]: "+1 Dmg Red.",
-  [LuminanceAura.destruction]: "+1 Dmg",
-  [LuminanceAura.retribution]: "+1 Crit Dmg",
-  [LuminanceAura.hardening]: "+1 Crit Dmg Red.",
 };
 
 export const ITEM_NAME = {

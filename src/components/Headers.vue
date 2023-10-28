@@ -54,9 +54,9 @@
     </div>
     <div class="header">
       <div>
-        <div class="header-title" v-on:click="toggleXPAndLuminancePane">
+        <div class="header-title" v-on:click="toggleXPPane">
           <div>
-            <h3>XP &amp; Luminance</h3>
+            <h3>XP</h3>
           </div>
           <div class="right">
             <span
@@ -68,7 +68,7 @@
             >
           </div>
         </div>
-        <div v-if="xpAndLuminancePaneVisible" class="header-items">
+        <div v-if="xpPaneVisible" class="header-items">
           <div>Unassigned</div>
           <div class="right">
             <span
@@ -97,8 +97,6 @@
           <div class="right" v-bind:class="isOverspent ? 'red' : 'gray'">
             {{ requiredLevel }}
           </div>
-          <div>Luminance Spent</div>
-          <div class="right">{{ totalLuminanceXPSpent }}</div>
         </div>
       </div>
     </div>
@@ -191,8 +189,8 @@ export default {
     characterPaneVisible() {
       return this.$store.getters.characterPaneVisible;
     },
-    xpAndLuminancePaneVisible() {
-      return this.$store.getters.xpAndLuminancePaneVisible;
+    xpPaneVisible() {
+      return this.$store.getters.xpPaneVisible;
     },
     knobsAndDialsPaneVisible() {
       return this.$store.getters.knobsAndDialsPaneVisible;
@@ -234,9 +232,6 @@ export default {
     },
     requiredLevel() {
       return this.$store.getters.requiredLevel;
-    },
-    totalLuminanceXPSpent() {
-      return this.$store.getters.totalLuminanceXPSpent.toLocaleString();
     },
     name: {
       get() {
@@ -289,8 +284,8 @@ export default {
     toggleCharacterPane() {
       this.$store.commit("toggleCharacterPane");
     },
-    toggleXPAndLuminancePane() {
-      this.$store.commit("toggleXPAndLuminancePane");
+    toggleXPPane() {
+      this.$store.commit("toggleXPPane");
     },
     toggleKnobsAndDialsPane() {
       this.$store.commit("toggleKnobsAndDialsPane");

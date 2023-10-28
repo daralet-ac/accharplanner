@@ -1,8 +1,6 @@
 import {
   AUGMENTATIONS,
   AUGMENTATION_MAX_USES,
-  LUMINANCE_AURA_MAX_USES,
-  LUMINANCE_AURAS,
   UNTRAINED_STATE,
   MAX_CREATION_ATTRIBUTE_TOTAL_POINTS,
   MAX_SKILL_INVESTED_TRAINED,
@@ -46,9 +44,6 @@ export default {
     state.ui.paneVisibility.augmentations =
       !state.ui.paneVisibility.augmentations;
   },
-  toggleAurasPane(state: State) {
-    state.ui.paneVisibility.auras = !state.ui.paneVisibility.auras;
-  },
   toggleItemsPane(state: State) {
     state.ui.paneVisibility.items = !state.ui.paneVisibility.items;
   },
@@ -61,9 +56,8 @@ export default {
   toggleCharacterPane(state: State) {
     state.ui.paneVisibility.character = !state.ui.paneVisibility.character;
   },
-  toggleXPAndLuminancePane(state: State) {
-    state.ui.paneVisibility.xpAndLuminance =
-      !state.ui.paneVisibility.xpAndLuminance;
+  toggleXPPane(state: State) {
+    state.ui.paneVisibility.xp = !state.ui.paneVisibility.xp;
   },
   toggleKnobsAndDialsPane(state: State) {
     state.ui.paneVisibility.knobsAndDials =
@@ -188,13 +182,6 @@ export default {
 
   updateExtraSkillCredit(state: State, payload: any) {
     state.build.character.extraSkillCredits[payload.name] = payload.value;
-
-    // Set luminance aura skill points to match
-    if (payload.name === "luminance1" || payload.name === "luminance2") {
-      state.build.character.luminance_auras.skill.invested =
-        state.build.character.extraSkillCredits["luminance1"] +
-        state.build.character.extraSkillCredits["luminance2"];
-    }
   },
 
   updateItem(state: State, payload: any) {
@@ -416,20 +403,6 @@ export default {
     AUGMENTATIONS.forEach((aug_name: string) => {
       state.build.character.augmentations[aug_name].invested =
         value == 1 ? AUGMENTATION_MAX_USES[aug_name] : 0;
-    });
-  },
-
-  // Luminance Auras
-  updateLuminanceAuraInvested(state: State, payload: any) {
-    state.build.character.luminance_auras[payload.name].invested = Number(
-      payload.value
-    );
-  },
-
-  changeAllLuminanceAuraInvestment(state: State, value: any) {
-    LUMINANCE_AURAS.forEach((aura_name: string) => {
-      state.build.character.luminance_auras[aura_name].invested =
-        value == 1 ? LUMINANCE_AURA_MAX_USES[aura_name] : 0;
     });
   },
 

@@ -11,7 +11,6 @@ import {
   SKILL_POINTS_AT_LEVEL,
   SKILL_COST_AT_TRAINING,
   SPEC_COSTS_AUG,
-  LUMINANCE_AURA_COST,
   MAX_CREATION_ATTRIBUTE_TOTAL_POINTS,
   MAX_LEVEL,
 } from "../constants";
@@ -39,9 +38,6 @@ export default {
   augmentationsPaneVisible: (state: State) => {
     return state.ui.paneVisibility.augmentations;
   },
-  aurasPaneVisible: (state: State) => {
-    return state.ui.paneVisibility.auras;
-  },
   itemsPaneVisible: (state: State) => {
     return state.ui.paneVisibility.items;
   },
@@ -54,8 +50,8 @@ export default {
   characterPaneVisible: (state: State) => {
     return state.ui.paneVisibility.character;
   },
-  xpAndLuminancePaneVisible: (state: State) => {
-    return state.ui.paneVisibility.xpAndLuminance;
+  xpPaneVisible: (state: State) => {
+    return state.ui.paneVisibility.xp;
   },
   knobsAndDialsPaneVisible: (state: State) => {
     return state.ui.paneVisibility.knobsAndDials;
@@ -212,8 +208,7 @@ export default {
     return (
       SKILL_POINTS_AT_LEVEL[state.build.character.level] +
       (state.build.character.extraSkillCredits.railrea ? 1 : 0) +
-      (state.build.character.extraSkillCredits.oswald ? 1 : 0) +
-      state.build.character.luminance_auras.skill.invested
+      (state.build.character.extraSkillCredits.oswald ? 1 : 0)
     );
   },
 
@@ -243,36 +238,6 @@ export default {
         cost += 1;
       }
     });
-
-    return cost;
-  },
-
-  totalLuminanceXPSpent: (state: State) => {
-    let cost = 0;
-
-    Object.keys(SPEC_COSTS_AUG).forEach((skill) => {
-      if (
-        state.build.character.skills[skill] &&
-        state.build.character.skills[skill].training == Training.SPECIALIZED &&
-        SPEC_COSTS_AUG[skill]
-      ) {
-        cost += 1000000000;
-      }
-    });
-
-    // Add in cost of the auras that are selected
-    Object.keys(LUMINANCE_AURA_COST).forEach((aura) => {
-      cost +=
-        LUMINANCE_AURA_COST[aura][
-          state.build.character.luminance_auras[aura].invested
-        ];
-    });
-
-    // Enlightenment requires you get all lum auras (20mil xp)
-    // TODO: Track auras and this together
-    if (state.build.character.timesEnlightened > 0) {
-      cost += 20000000 * state.build.character.timesEnlightened;
-    }
 
     return cost;
   },
@@ -570,7 +535,6 @@ export default {
       Math.round((getters.coordinationBase + getters.focusBase) / 3) +
       trainingBonus(state.build.character.skills.alchemy.training) +
       state.build.character.skills.alchemy.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -605,9 +569,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.alchemy.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -622,7 +583,6 @@ export default {
       Math.round(getters.focusBase / 3) +
       trainingBonus(state.build.character.skills.arcane_lore.training) +
       state.build.character.skills.arcane_lore.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -646,10 +606,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.arcane_lore.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -665,7 +621,6 @@ export default {
       Math.round((getters.enduranceBase + getters.focusBase) / 2) +
       trainingBonus(state.build.character.skills.armor_tinkering.training) +
       state.build.character.skills.armor_tinkering.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -697,10 +652,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.armor_tinkering.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -728,10 +679,6 @@ export default {
       cantripBonus(state.build.character.skills.assess_creature.cantrip) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.assess_creature.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -745,7 +692,6 @@ export default {
     return (
       trainingBonus(state.build.character.skills.assess_person.training) +
       state.build.character.skills.assess_person.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -758,10 +704,6 @@ export default {
       cantripBonus(state.build.character.skills.assess_person.cantrip) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.assess_person.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -774,7 +716,6 @@ export default {
       Math.round((getters.coordinationBase + getters.focusBase) / 3) +
       trainingBonus(state.build.character.skills.cooking.training) +
       state.build.character.skills.cooking.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -788,9 +729,6 @@ export default {
       standardSetBonus(state.build.character.armor_sets.crafters.equipped) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.cooking.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0) +
       Math.round(
         (buffBonus(state.build.character.attributes.coordination.buff) +
@@ -833,7 +771,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -865,10 +802,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.creature_enchantment.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -880,7 +813,6 @@ export default {
     return (
       trainingBonus(state.build.character.skills.deception.training) +
       state.build.character.skills.deception.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -893,9 +825,6 @@ export default {
       cantripBonus(state.build.character.skills.deception.cantrip) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.deception.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -910,7 +839,6 @@ export default {
       Math.round((getters.strengthBase + getters.coordinationBase) / 3) +
       trainingBonus(state.build.character.skills.dirty_fighting.training) +
       state.build.character.skills.dirty_fighting.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -945,10 +873,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.dirty_fighting.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -963,7 +887,6 @@ export default {
       Math.round((getters.coordinationBase + getters.coordinationBase) / 3) +
       trainingBonus(state.build.character.skills.dual_wield.training) +
       state.build.character.skills.dual_wield.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -998,9 +921,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.dual_wield.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1020,7 +940,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1057,10 +976,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.finesse_weapons.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1073,7 +988,6 @@ export default {
       Math.round((getters.coordinationBase + getters.focusBase) / 3) +
       trainingBonus(state.build.character.skills.fletching.training) +
       state.build.character.skills.fletching.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1108,9 +1022,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.fletching.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1123,7 +1034,6 @@ export default {
       Math.round((getters.coordinationBase + getters.focusBase) / 3) +
       trainingBonus(state.build.character.skills.healing.training) +
       state.build.character.skills.healing.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1157,9 +1067,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.healing.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1178,7 +1085,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1212,10 +1118,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.heavy_weapons.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1235,7 +1137,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1267,10 +1168,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.item_enchantment.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1285,7 +1182,6 @@ export default {
       Math.round((getters.coordinationBase + getters.focusBase) / 2) +
       trainingBonus(state.build.character.skills.item_tinkering.training) +
       state.build.character.skills.item_tinkering.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1321,10 +1217,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.item_tinkering.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1337,7 +1229,6 @@ export default {
       Math.round((getters.strengthBase + getters.coordinationBase) / 2) +
       trainingBonus(state.build.character.skills.jump.training) +
       state.build.character.skills.jump.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1371,9 +1262,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.jump.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1387,7 +1275,6 @@ export default {
     return (
       trainingBonus(state.build.character.skills.leadership.training) +
       state.build.character.skills.leadership.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1400,9 +1287,6 @@ export default {
       cantripBonus(state.build.character.skills.leadership.cantrip) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.leadership.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1421,7 +1305,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1452,9 +1335,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.life_magic.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1473,7 +1353,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1507,10 +1386,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.light_weapons.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1523,7 +1398,6 @@ export default {
       Math.round((getters.coordinationBase + getters.focusBase) / 3) +
       trainingBonus(state.build.character.skills.lockpick.training) +
       state.build.character.skills.lockpick.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1558,9 +1432,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.lockpick.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1572,7 +1443,6 @@ export default {
     return (
       trainingBonus(state.build.character.skills.loyalty.training) +
       state.build.character.skills.loyalty.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1588,9 +1458,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.loyalty.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1605,7 +1472,6 @@ export default {
       Math.round((getters.focusBase + getters.selfBase) / 7) +
       trainingBonus(state.build.character.skills.magic_defense.training) +
       state.build.character.skills.magic_defense.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1639,10 +1505,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.magic_defense.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1660,7 +1522,6 @@ export default {
         state.build.character.skills.magic_item_tinkering.training
       ) +
       state.build.character.skills.magic_item_tinkering.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1681,10 +1542,6 @@ export default {
       (state.build.character.items.font_of_joji ? 2 : 0) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.magic_item_tinkering.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1700,7 +1557,6 @@ export default {
       Math.round((getters.focusBase + getters.selfBase) / 6) +
       trainingBonus(state.build.character.skills.mana_conversion.training) +
       state.build.character.skills.mana_conversion.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1731,10 +1587,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.mana_conversion.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1749,7 +1601,6 @@ export default {
       Math.round((getters.coordinationBase + getters.quicknessBase) / 3) +
       trainingBonus(state.build.character.skills.melee_defense.training) +
       state.build.character.skills.melee_defense.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1787,10 +1638,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.melee_defense.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1806,7 +1653,6 @@ export default {
       Math.round((getters.coordinationBase + getters.quicknessBase) / 5) +
       trainingBonus(state.build.character.skills.missile_defense.training) +
       state.build.character.skills.missile_defense.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1845,10 +1691,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.missile_defense.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1868,7 +1710,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1896,10 +1737,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.missile_weapons.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1914,7 +1751,6 @@ export default {
       Math.round((getters.strengthBase + getters.quicknessBase) / 3) +
       trainingBonus(state.build.character.skills.recklessness.training) +
       state.build.character.skills.recklessness.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1943,10 +1779,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.recklessness.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1959,7 +1791,6 @@ export default {
       getters.quicknessBase +
       trainingBonus(state.build.character.skills.run.training) +
       state.build.character.skills.run.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -1976,9 +1807,6 @@ export default {
       cantripBonus(state.build.character.attributes.quickness.cantrip) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.run.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -1990,7 +1818,6 @@ export default {
     return (
       trainingBonus(state.build.character.skills.salvaging.training) +
       state.build.character.skills.salvaging.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2006,9 +1833,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.salvaging.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2021,7 +1845,6 @@ export default {
       Math.round((getters.strengthBase + getters.coordinationBase) / 2) +
       trainingBonus(state.build.character.skills.shield.training) +
       state.build.character.skills.shield.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2054,9 +1877,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.shield.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2071,7 +1891,6 @@ export default {
       Math.round((getters.coordinationBase + getters.quicknessBase) / 3) +
       trainingBonus(state.build.character.skills.sneak_attack.training) +
       state.build.character.skills.sneak_attack.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2106,10 +1925,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.sneak_attack.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2122,7 +1937,6 @@ export default {
       Math.round((getters.enduranceBase + getters.selfBase) / 3) +
       trainingBonus(state.build.character.skills.summoning.training) +
       state.build.character.skills.summoning.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2151,9 +1965,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.summoning.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2173,7 +1984,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2208,10 +2018,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.two_handed_combat.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2230,7 +2036,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2261,9 +2066,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.void_magic.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2280,7 +2082,6 @@ export default {
         .invested === 1
         ? 10
         : 0) +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2311,9 +2112,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.war_magic.training === Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2329,7 +2127,6 @@ export default {
       Math.round((getters.strengthBase + getters.focusBase) / 2) +
       trainingBonus(state.build.character.skills.weapon_tinkering.training) +
       state.build.character.skills.weapon_tinkering.invested +
-      state.build.character.luminance_auras.world.invested +
       state.build.character.timesEnlightened
     );
   },
@@ -2356,10 +2153,6 @@ export default {
       ) +
       (state.build.character.augmentations.jack_of_all_trades.invested === 1
         ? 5
-        : 0) +
-      (state.build.character.skills.weapon_tinkering.training ===
-      Training.SPECIALIZED
-        ? state.build.character.luminance_auras.specialization.invested * 2
         : 0)
     );
   },
@@ -2400,59 +2193,6 @@ export default {
       return "Cannot augment attributes more than ten times!";
     }
   },
-  auraErrors: (state: State, getters: any) => {
-    const msg = "Using too many Seers. You may only choose one.";
-
-    // If you have Specialization, you can't have Retribution, Hardening
-    if (
-      state.build.character.luminance_auras.specialization.invested > 0 &&
-      (state.build.character.luminance_auras.hardening.invested > 0 ||
-        state.build.character.luminance_auras.retribution.invested > 0)
-    ) {
-      return msg;
-    }
-
-    // If you have Destruction, you can't have Invulnerability, Hardening
-    if (
-      state.build.character.luminance_auras.destruction.invested > 0 &&
-      (state.build.character.luminance_auras.invulnerability.invested > 0 ||
-        state.build.character.luminance_auras.hardening.invested > 0)
-    ) {
-      return msg;
-    }
-
-    // If you have Invulnerability, you can't have Destruction, Retribution
-    if (
-      state.build.character.luminance_auras.invulnerability.invested > 0 &&
-      (state.build.character.luminance_auras.retribution.invested > 0 ||
-        state.build.character.luminance_auras.destruction.invested > 0)
-    ) {
-      return msg;
-    }
-
-    // If you have Retribution, you can't have Specialization, Invulnerability, Hardening
-    if (
-      state.build.character.luminance_auras.retribution.invested > 0 &&
-      (state.build.character.luminance_auras.specialization.invested > 0 ||
-        state.build.character.luminance_auras.invulnerability.invested > 0 ||
-        state.build.character.luminance_auras.hardening.invested > 0)
-    ) {
-      return msg;
-    }
-
-    // If you have Hardening, you can't have Specialization, Destruction, Retribution
-    if (
-      state.build.character.luminance_auras.hardening.invested > 0 &&
-      (state.build.character.luminance_auras.specialization.invested > 0 ||
-        state.build.character.luminance_auras.destruction.invested > 0 ||
-        state.build.character.luminance_auras.retribution.invested > 0)
-    ) {
-      return msg;
-    }
-
-    return null;
-  },
-
   armorSetNumEquippedErrors: (state: State, getters: any) => {
     const numEquipped = Object.keys(state.build.character.armor_sets)
       .map((set) => {

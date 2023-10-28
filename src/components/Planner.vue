@@ -104,7 +104,6 @@
       <AttributesAndVitals />
       <Skills />
       <Augmentations />
-      <LuminanceAuras />
       <Items />
       <ArmorSets />
     </div>
@@ -119,7 +118,6 @@ import Headers from "./Headers.vue";
 import AttributesAndVitals from "./AttributesAndVitals.vue";
 import Skills from "./Skills.vue";
 import Augmentations from "./Augmentations.vue";
-import LuminanceAuras from "./LuminanceAuras.vue";
 import Items from "./Items.vue";
 import ArmorSets from "./ArmorSets.vue";
 import { exportCharacter } from "../helpers";
@@ -134,7 +132,6 @@ export default {
     AttributesAndVitals,
     Skills,
     Augmentations,
-    LuminanceAuras,
     Items,
     ArmorSets,
   },

@@ -7,8 +7,6 @@
       <div class="header-items alt-onecol" v-if="collapsed">
         <ExtraSkillCredit id="railrea" name="Aun Ralirea" />
         <ExtraSkillCredit id="oswald" name="Chasing Oswald" />
-        <ExtraSkillCredit id="luminance1" name="Luminance 1" />
-        <ExtraSkillCredit id="luminance2" name="Luminance 2" />
       </div>
     </div>
   </div>

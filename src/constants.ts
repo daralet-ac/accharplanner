@@ -4,7 +4,6 @@ import {
   Skill,
   Training,
   Augmentation,
-  LuminanceAura,
   StringIndexedDict,
   NumberIndexedDict,
 } from "./types";
@@ -117,25 +116,6 @@ export const AUGMENTATIONS: string[] = [
   Augmentation.master_of_the_focused_eye,
   Augmentation.jack_of_all_trades,
   Augmentation.archmages_endurance,
-];
-
-export const LUMINANCE_AURAS: string[] = [
-  LuminanceAura.aetheric_vision,
-  LuminanceAura.craftsman,
-  LuminanceAura.glory,
-  LuminanceAura.mana_flow,
-  LuminanceAura.mana_infusion,
-  LuminanceAura.protection,
-  LuminanceAura.purity,
-  LuminanceAura.skill,
-  LuminanceAura.temperance,
-  LuminanceAura.valor,
-  LuminanceAura.world,
-  LuminanceAura.specialization,
-  LuminanceAura.invulnerability,
-  LuminanceAura.destruction,
-  LuminanceAura.retribution,
-  LuminanceAura.hardening,
 ];
 
 export const SKILL_DEPENDS_ON_ATTRIBUTES: StringIndexedDict<string[]> = {
@@ -1866,49 +1846,4 @@ export const AUGMENTATION_COST: StringIndexedDict<number[]> = {
   [Augmentation.master_of_the_focused_eye]: [0, 2e9],
   [Augmentation.jack_of_all_trades]: [0, 4e9],
   [Augmentation.archmages_endurance]: [0, 1e9, 2e9, 3e9, 4e9, 5e9],
-};
-
-export const LUMINANCE_AURA_COST: StringIndexedDict<number[]> = {
-  [LuminanceAura.aetheric_vision]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.craftsman]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.glory]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.mana_flow]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.mana_infusion]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.protection]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.purity]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.skill]: [0, 1e6, 2e6],
-  [LuminanceAura.temperance]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.valor]: [0, 100000, 250000, 450000, 700000, 1000000],
-  [LuminanceAura.world]: [
-    0, 100000, 300000, 600000, 1000000, 1500000, 2100000, 2800000, 3600000,
-    4500000, 5500000,
-  ],
-  [LuminanceAura.specialization]: [
-    0, 350000, 750000, 1200000, 1700000, 2250000,
-  ],
-  [LuminanceAura.invulnerability]: [
-    0, 350000, 750000, 1200000, 1700000, 2250000,
-  ],
-  [LuminanceAura.destruction]: [0, 350000, 750000, 1200000, 1700000, 2250000],
-  [LuminanceAura.retribution]: [0, 350000, 750000, 1200000, 1700000, 2250000],
-  [LuminanceAura.hardening]: [0, 350000, 750000, 1200000, 1700000, 2250000],
-};
-
-export const LUMINANCE_AURA_MAX_USES: StringIndexedDict<number> = {
-  [LuminanceAura.aetheric_vision]: 5,
-  [LuminanceAura.craftsman]: 5,
-  [LuminanceAura.glory]: 5,
-  [LuminanceAura.mana_flow]: 5,
-  [LuminanceAura.mana_infusion]: 5,
-  [LuminanceAura.protection]: 5,
-  [LuminanceAura.purity]: 5,
-  [LuminanceAura.skill]: 2,
-  [LuminanceAura.temperance]: 5,
-  [LuminanceAura.valor]: 5,
-  [LuminanceAura.world]: 10,
-  [LuminanceAura.specialization]: 5,
-  [LuminanceAura.invulnerability]: 5,
-  [LuminanceAura.destruction]: 5,
-  [LuminanceAura.retribution]: 5,
-  [LuminanceAura.hardening]: 5,
 };
