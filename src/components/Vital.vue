@@ -89,9 +89,7 @@ export default {
         value = 0;
       }
 
-      if (this.$store.state.settings.infiniteMode){
-        // Do nothing
-      } else if (value > MAX_VITAL_INVESTED) {
+      if (value > MAX_VITAL_INVESTED) {
         value = MAX_VITAL_INVESTED;
       } else if (value < 0) {
         value = 0;

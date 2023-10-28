@@ -262,15 +262,10 @@ export default {
   },
 
   updateAttributeInvested(state: State, payload: any) {
-    let newval;
-
-    if (state.settings.infiniteMode) {
-      newval = Number(payload.value);
-    } else {
-      newval = Math.min(Number(payload.value), MAX_ATTRIBUTE_INVESTED);
-    }
-
-    state.build.character.attributes[payload.name].invested = newval;
+    state.build.character.attributes[payload.name].invested = Math.min(
+      Number(payload.value),
+      MAX_ATTRIBUTE_INVESTED
+    );
   },
 
   updateAttributeBuff(state: State, payload: any) {
@@ -284,26 +279,17 @@ export default {
   },
 
   updateVitalInvested(state: State, payload: any) {
-    let newval;
-
-    if (state.settings.infiniteMode) {
-      newval = Number(payload.value);
-    } else {
-      newval = Math.min(Number(payload.value), MAX_VITAL_INVESTED);
-    }
-
-    state.build.character.vitals[payload.name].invested = newval;
+    state.build.character.vitals[payload.name].invested = Math.min(
+      Number(payload.value),
+      MAX_VITAL_INVESTED
+    );
   },
 
   updateSkillInvested(state: State, payload: { name: string; value: number }) {
     let skill = state.build.character.skills[payload.name];
 
-    if (state.settings.infiniteMode) {
-      skill.invested = Number(payload.value);
-    } else {
-      const max = maxSkillInvested(skill.training);
-      skill.invested = Math.min(Number(payload.value), max);
-    }
+    const max = maxSkillInvested(skill.training);
+    skill.invested = Math.min(Number(payload.value), max);
   },
 
   updateSkillBuff(state: State, payload: any) {
@@ -342,11 +328,6 @@ export default {
     switch (currentTraining) {
       case Training.SPECIALIZED:
         newTraining = Training.TRAINED;
-
-        // Stop now if in infinite mode
-        if (state.settings.infiniteMode) {
-          break;
-        }
 
         // Reduce max skill invested to 208 (max for trained) if over
         if (
@@ -615,20 +596,7 @@ export default {
     state.ui.modalVisibility.share = value;
   },
 
-  setSettingsModalVisibility(state: State, value: boolean) {
-    state.ui.modalVisibility.settings = value;
-  },
-
   // Settings
-  updateSettingsInfiniteMode(state: State, value: boolean) {
-    state.settings.infiniteMode = value;
-
-    // Reset level back to within 1-275
-    state.build.character.level = Math.min(
-      state.build.character.level,
-      MAX_LEVEL
-    );
-  },
 
   // Auth
   updateIsLoggedIn(state: State, value: boolean) {

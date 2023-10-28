@@ -55,7 +55,6 @@ export interface PaneVisibility {
 
 export interface ModalVisibility {
   share: boolean;
-  settings: boolean;
 }
 
 export interface UIState {
@@ -74,9 +73,7 @@ export interface Build {
   stages: Character[];
 }
 
-interface Settings {
-  infiniteMode: boolean;
-}
+interface Settings {}
 
 interface AuthState {
   isLoggedIn: boolean;

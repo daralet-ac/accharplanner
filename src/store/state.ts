@@ -23,7 +23,6 @@ let state: State = {
     },
     modalVisibility: {
       share: false,
-      settings: false,
     },
     darkMode: null,
   },
@@ -31,9 +30,7 @@ let state: State = {
     character: DefaultCharacter(),
     stages: [],
   },
-  settings: {
-    infiniteMode: false,
-  },
+  settings: {},
   auth: {
     isLoggedIn: false,
     isAdmin: false,

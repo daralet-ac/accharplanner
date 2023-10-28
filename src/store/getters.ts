@@ -75,19 +75,7 @@ export default {
   },
 
   totalXPEarned: (state: State) => {
-    let cost: number = 0;
-
-    if (state.settings.infiniteMode && state.build.character.level > 275) {
-      cost = Math.round(
-        (1 / 9) *
-          (Math.pow(state.build.character.level + 5, 5) - Math.pow(6, 5))
-      );
-    } else {
-      cost += COST_LEVEL[state.build.character.level];
-      cost += state.build.character.timesEnlightened * COST_LEVEL[MAX_LEVEL];
-    }
-
-    return cost;
+    return COST_LEVEL[state.build.character.level];
   },
 
   totalXPInvested: (state: State, getters: any) => {
@@ -169,11 +157,7 @@ export default {
 
   totalXPInvestedError: (state: State, getters: any) => {
     if (isNaN(getters.totalXPInvested)) {
-      if (state.settings.infiniteMode) {
-        return "XP calculations in Infinite Mode may not work because I haven't brough in the formulas. If you have good ones, let me know.";
-      } else {
-        return "Calculating total invested experience failed for an unknown reason. Please file a bug report.";
-      }
+      return "Calculating total invested experience failed for an unknown reason. Please file a bug report.";
     } else {
       return false;
     }
@@ -191,11 +175,7 @@ export default {
 
   unassignedXPError: (state: State, getters: any) => {
     if (isNaN(getters.totalXPInvested)) {
-      if (state.settings.infiniteMode) {
-        return "XP calculations in Infinite Mode may not work because I haven't brough in the formulas. If you have good ones, let me know.";
-      } else {
-        return "Calculating unassigned experience failed for an unknown reason. Please file a bug report.";
-      }
+      return "Calculating unassigned experience failed for an unknown reason. Please file a bug report.";
     } else {
       return false;
     }
@@ -2493,14 +2473,8 @@ export default {
   shareModalVisible(state: State) {
     return state.ui.modalVisibility.share;
   },
-  settingsModalVisible(state: State) {
-    return state.ui.modalVisibility.settings;
-  },
 
-  // Setttings
-  settingsInfiniteMode: (state: State, getters: any) => {
-    return state.settings.infiniteMode;
-  },
+  // Settings
 
   // Auth
   isLoggedIn: (state: State, getters: any) => {

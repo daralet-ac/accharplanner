@@ -273,10 +273,4 @@ export default {
   hideShareModal(context: any) {
     context.commit("setShareModalVisibility", false);
   },
-  showSettingsModal(context: any) {
-    context.commit("setSettingsModalVisibility", true);
-  },
-  hideSettingsModal(context: any) {
-    context.commit("setSettingsModalVisibility", false);
-  },
 };
