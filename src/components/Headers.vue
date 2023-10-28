@@ -143,19 +143,6 @@
               <option value="4">Legen.</option>
             </select>
           </div>
-          <div>Enlightened</div>
-          <div class="flex-row">
-            <div class="w70">
-              <input type="range" min="0" :max="maxTimesEnlightened" v-model="timesEnlightened" />
-            </div>
-            <div class="w30 right">
-              <input
-                class="number"
-                type="text"
-                v-model="timesEnlightened"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -168,7 +155,6 @@ import ExtraSkillCredits from "./ExtraSkillCredits.vue";
 import {
   MIN_LEVEL,
   MAX_LEVEL,
-  MAX_TIMES_ENLIGHTENDED,
   MAX_SKILL_INVESTED_SPECIALIZED,
 } from "../constants";
 import { Race } from "../types";
@@ -182,7 +168,6 @@ export default {
     return {
       maxLevel: MAX_LEVEL,
       maxSkillInvestedSpecialized: MAX_SKILL_INVESTED_SPECIALIZED,
-      maxTimesEnlightened: MAX_TIMES_ENLIGHTENDED,
     }
   },
   computed: {
@@ -266,14 +251,6 @@ export default {
       },
       set(value) {
         this.$store.commit("updateGender", value);
-      },
-    },
-    timesEnlightened: {
-      get() {
-        return this.$store.state.build.character.timesEnlightened;
-      },
-      set(value) {
-        this.$store.commit("updateTimesEnlightened", value);
       },
     },
     exportedCharacter() {

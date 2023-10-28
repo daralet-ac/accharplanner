@@ -11,7 +11,6 @@ export interface Character {
   race: string;
   gender: string;
   level: number;
-  timesEnlightened: number;
   extraSkillCredits: any;
   attributes: any;
   vitals: any;

@@ -166,20 +166,6 @@ export default {
     state.build.character.gender = value;
   },
 
-  updateTimesEnlightened(state: State, value: number) {
-    let actual = Number(value);
-
-    if (isNaN(actual)) {
-      actual = 0;
-    } else if (actual < 0) {
-      actual = 0;
-    } else if (actual > 5) {
-      actual = 5;
-    }
-
-    state.build.character.timesEnlightened = actual;
-  },
-
   updateExtraSkillCredit(state: State, payload: any) {
     state.build.character.extraSkillCredits[payload.name] = payload.value;
   },

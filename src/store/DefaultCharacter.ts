@@ -7,7 +7,6 @@ export default function (): Character {
     race: "Aluvian",
     gender: "Female",
     level: 1,
-    timesEnlightened: 0,
     extraSkillCredits: {
       railrea: false,
       oswald: false,
