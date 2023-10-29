@@ -1,11 +1,4 @@
-import {
-  Attribute,
-  Vital,
-  Skill,
-  Item,
-  ArmorSet,
-  NumberIndexedDict,
-} from "./types";
+import { Attribute, Vital, Skill, Item, NumberIndexedDict } from "./types";
 
 export const ATTRIBUTE_NAME = {
   [Attribute.strength]: "Strength",
@@ -127,32 +120,4 @@ export const CANTRIP_NAME: NumberIndexedDict<string> = {
 export const ITEM_NAME = {
   [Item.focusing_stone]: "Focusing Stone",
   [Item.font_of_joji]: "Font of Joji",
-};
-
-export const ARMOR_SET_NAME = {
-  [ArmorSet.adepts]: "Adept's",
-  [ArmorSet.archers]: "Archer's",
-  [ArmorSet.crafters]: "Crafter's",
-  [ArmorSet.dedication]: "Dedication",
-  [ArmorSet.defenders]: "Defender's",
-  [ArmorSet.dextrous]: "Dextrous",
-  [ArmorSet.hearty]: "Hearty",
-  [ArmorSet.soldiers]: "Soldier's",
-  [ArmorSet.swift]: "Swift",
-  [ArmorSet.tinkers]: "Tinkers",
-  [ArmorSet.wise]: "Wise",
-};
-
-export const ARMOR_SET_NAME_EXTRA_INFO = {
-  [ArmorSet.adepts]: "All Magics, Magic Defense",
-  [ArmorSet.archers]: "Missile Weapons, Missile Defense",
-  [ArmorSet.crafters]: "All Crafting, Loyalty",
-  [ArmorSet.dedication]: "All Attributes",
-  [ArmorSet.defenders]: "All Defenses, Stamina",
-  [ArmorSet.dextrous]: "Coordination, Quickness, Stamina",
-  [ArmorSet.hearty]: "Endurance, Strength, Health",
-  [ArmorSet.soldiers]: "All Melee, DF, Reck, Melee Defense",
-  [ArmorSet.swift]: "Jump, Run, SA, DW, Finesse",
-  [ArmorSet.tinkers]: "All Tinkering, Salvaging",
-  [ArmorSet.wise]: "Focus, Willpower, Summoning, Mana",
 };

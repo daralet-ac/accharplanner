@@ -296,40 +296,5 @@ export default function (): Character {
       focusing_stone: false,
       font_of_joji: false,
     },
-    armor_sets: {
-      adepts: {
-        equipped: 0,
-      },
-      archers: {
-        equipped: 0,
-      },
-      crafters: {
-        equipped: 0,
-      },
-      dedication: {
-        equipped: 0,
-      },
-      defenders: {
-        equipped: 0,
-      },
-      dextrous: {
-        equipped: 0,
-      },
-      hearty: {
-        equipped: 0,
-      },
-      soldiers: {
-        equipped: 0,
-      },
-      swift: {
-        equipped: 0,
-      },
-      tinkers: {
-        equipped: 0,
-      },
-      wise: {
-        equipped: 0,
-      },
-    },
   };
 }

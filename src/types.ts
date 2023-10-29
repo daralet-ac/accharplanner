@@ -15,7 +15,6 @@ export interface Character {
   vitals: any;
   skills: any;
   items: any;
-  armor_sets: any;
 }
 
 enum NotificationType {
@@ -39,7 +38,6 @@ export interface PaneVisibility {
   attributes: boolean;
   skills: boolean;
   items: boolean;
-  armor_sets: boolean;
   buildStages: boolean;
   character: boolean;
   xp: boolean;
@@ -163,20 +161,6 @@ export enum Training {
 export enum Item {
   focusing_stone = "focusing_stone",
   font_of_joji = "font_of_joji",
-}
-
-export enum ArmorSet {
-  adepts = "adepts",
-  archers = "archers",
-  crafters = "crafters",
-  dedication = "dedication",
-  defenders = "defenders",
-  dextrous = "dextrous",
-  hearty = "hearty",
-  soldiers = "soldiers",
-  swift = "swift",
-  tinkers = "tinkers",
-  wise = "wise",
 }
 
 export enum THEME {

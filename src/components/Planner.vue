@@ -104,7 +104,6 @@
       <AttributesAndVitals />
       <Skills />
       <Items />
-      <ArmorSets />
     </div>
   </div>
 </template>
@@ -117,7 +116,6 @@ import Headers from "./Headers.vue";
 import AttributesAndVitals from "./AttributesAndVitals.vue";
 import Skills from "./Skills.vue";
 import Items from "./Items.vue";
-import ArmorSets from "./ArmorSets.vue";
 import { exportCharacter } from "../helpers";
 
 export default {
@@ -130,7 +128,6 @@ export default {
     AttributesAndVitals,
     Skills,
     Items,
-    ArmorSets,
   },
   created: function () {
     // Bind Esc key to closing an open modal

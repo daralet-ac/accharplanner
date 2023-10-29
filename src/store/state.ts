@@ -12,7 +12,6 @@ let state: State = {
       attributes: true,
       skills: true,
       items: true,
-      armor_sets: true,
       buildStages: true,
       character: true,
       xp: true,

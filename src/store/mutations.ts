@@ -37,9 +37,6 @@ export default {
   toggleItemsPane(state: State) {
     state.ui.paneVisibility.items = !state.ui.paneVisibility.items;
   },
-  toggleArmorSetsPane(state: State) {
-    state.ui.paneVisibility.armor_sets = !state.ui.paneVisibility.armor_sets;
-  },
   toggleBuildStagesPane(state: State) {
     state.ui.paneVisibility.buildStages = !state.ui.paneVisibility.buildStages;
   },
@@ -116,9 +113,6 @@ export default {
 
   updateItem(state: State, payload: any) {
     state.build.character.items[payload.id] = payload.value;
-  },
-  updateArmorSet(state: State, payload: any) {
-    state.build.character.armor_sets[payload.id].equipped = payload.value;
   },
   updateAttributeCreation(state: State, payload: any) {
     let newVal = Number(payload.value);
