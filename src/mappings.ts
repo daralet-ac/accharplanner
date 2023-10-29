@@ -1,4 +1,4 @@
-import { Attribute, Vital, Skill, Item, NumberIndexedDict } from "./types";
+import { Attribute, Vital, Skill, NumberIndexedDict } from "./types";
 
 export const ATTRIBUTE_NAME = {
   [Attribute.strength]: "Strength",
@@ -115,9 +115,4 @@ export const CANTRIP_NAME: NumberIndexedDict<string> = {
   2: "Major",
   3: "Epic",
   4: "Legen.",
-};
-
-export const ITEM_NAME = {
-  [Item.focusing_stone]: "Focusing Stone",
-  [Item.font_of_joji]: "Font of Joji",
 };

@@ -103,7 +103,6 @@
     <div class="row panes">
       <AttributesAndVitals />
       <Skills />
-      <Items />
     </div>
   </div>
 </template>
@@ -115,7 +114,6 @@ import ShareModal from "./ShareModal.vue";
 import Headers from "./Headers.vue";
 import AttributesAndVitals from "./AttributesAndVitals.vue";
 import Skills from "./Skills.vue";
-import Items from "./Items.vue";
 import { exportCharacter } from "../helpers";
 
 export default {
@@ -127,7 +125,6 @@ export default {
     Headers,
     AttributesAndVitals,
     Skills,
-    Items,
   },
   created: function () {
     // Bind Esc key to closing an open modal

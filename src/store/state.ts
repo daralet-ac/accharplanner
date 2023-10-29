@@ -11,7 +11,6 @@ let state: State = {
     paneVisibility: {
       attributes: true,
       skills: true,
-      items: true,
       buildStages: true,
       character: true,
       xp: true,

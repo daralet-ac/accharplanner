@@ -14,7 +14,6 @@ export interface Character {
   attributes: any;
   vitals: any;
   skills: any;
-  items: any;
 }
 
 enum NotificationType {
@@ -37,7 +36,6 @@ export interface SavedBuild {
 export interface PaneVisibility {
   attributes: boolean;
   skills: boolean;
-  items: boolean;
   buildStages: boolean;
   character: boolean;
   xp: boolean;
@@ -156,11 +154,6 @@ export enum Training {
   UNTRAINED = "untrained",
   TRAINED = "trained",
   SPECIALIZED = "specialized",
-}
-
-export enum Item {
-  focusing_stone = "focusing_stone",
-  font_of_joji = "font_of_joji",
 }
 
 export enum THEME {

@@ -34,9 +34,6 @@ export default {
   toggleSkillsPane(state: State) {
     state.ui.paneVisibility.skills = !state.ui.paneVisibility.skills;
   },
-  toggleItemsPane(state: State) {
-    state.ui.paneVisibility.items = !state.ui.paneVisibility.items;
-  },
   toggleBuildStagesPane(state: State) {
     state.ui.paneVisibility.buildStages = !state.ui.paneVisibility.buildStages;
   },
@@ -111,9 +108,6 @@ export default {
     state.build.character.gender = value;
   },
 
-  updateItem(state: State, payload: any) {
-    state.build.character.items[payload.id] = payload.value;
-  },
   updateAttributeCreation(state: State, payload: any) {
     let newVal = Number(payload.value);
 

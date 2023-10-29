@@ -292,9 +292,5 @@ export default function (): Character {
         cantrip: 0,
       },
     },
-    items: {
-      focusing_stone: false,
-      font_of_joji: false,
-    },
   };
 }
