@@ -69,6 +69,12 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
+      appraise: {
+        training: UNTRAINED_STATE[Skill.appraise],
+        invested: 0,
+        buff: 0,
+        cantrip: 0,
+      },
       arcane_lore: {
         training: UNTRAINED_STATE[Skill.arcane_lore],
         invested: 0,
@@ -81,14 +87,26 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
-      assess_creature: {
-        training: UNTRAINED_STATE[Skill.assess_creature],
+      assess: {
+        training: UNTRAINED_STATE[Skill.assess],
         invested: 0,
         buff: 0,
         cantrip: 0,
       },
-      assess_person: {
-        training: UNTRAINED_STATE[Skill.assess_person],
+      awareness: {
+        training: UNTRAINED_STATE[Skill.awareness],
+        invested: 0,
+        buff: 0,
+        cantrip: 0,
+      },
+      axe_and_mace: {
+        training: UNTRAINED_STATE[Skill.axe_and_mace],
+        invested: 0,
+        buff: 0,
+        cantrip: 0,
+      },
+      bow_and_crossbow: {
+        training: UNTRAINED_STATE[Skill.bow_and_crossbow],
         invested: 0,
         buff: 0,
         cantrip: 0,
@@ -99,8 +117,8 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
-      creature_enchantment: {
-        training: UNTRAINED_STATE[Skill.creature_enchantment],
+      dagger: {
+        training: UNTRAINED_STATE[Skill.dagger],
         invested: 0,
         buff: 0,
         cantrip: 0,
@@ -117,18 +135,6 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
-      dirty_fighting: {
-        training: UNTRAINED_STATE[Skill.dirty_fighting],
-        invested: 0,
-        buff: 0,
-        cantrip: 0,
-      },
-      finesse_weapons: {
-        training: UNTRAINED_STATE[Skill.finesse_weapons],
-        invested: 0,
-        buff: 0,
-        cantrip: 0,
-      },
       fletching: {
         training: UNTRAINED_STATE[Skill.fletching],
         invested: 0,
@@ -137,18 +143,6 @@ export default function (): Character {
       },
       healing: {
         training: UNTRAINED_STATE[Skill.healing],
-        invested: 0,
-        buff: 0,
-        cantrip: 0,
-      },
-      heavy_weapons: {
-        training: UNTRAINED_STATE[Skill.heavy_weapons],
-        invested: 0,
-        buff: 0,
-        cantrip: 0,
-      },
-      item_enchantment: {
-        training: UNTRAINED_STATE[Skill.item_enchantment],
         invested: 0,
         buff: 0,
         cantrip: 0,
@@ -173,12 +167,6 @@ export default function (): Character {
       },
       life_magic: {
         training: UNTRAINED_STATE[Skill.life_magic],
-        invested: 0,
-        buff: 0,
-        cantrip: 0,
-      },
-      light_weapons: {
-        training: UNTRAINED_STATE[Skill.light_weapons],
         invested: 0,
         buff: 0,
         cantrip: 0,
@@ -225,14 +213,8 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
-      missile_weapons: {
-        training: UNTRAINED_STATE[Skill.missile_weapons],
-        invested: 0,
-        buff: 0,
-        cantrip: 0,
-      },
-      recklessness: {
-        training: UNTRAINED_STATE[Skill.recklessness],
+      portal_magic: {
+        training: UNTRAINED_STATE[Skill.portal_magic],
         invested: 0,
         buff: 0,
         cantrip: 0,
@@ -255,14 +237,26 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
-      sneak_attack: {
-        training: UNTRAINED_STATE[Skill.sneak_attack],
+      spear_and_staff: {
+        training: UNTRAINED_STATE[Skill.spear_and_staff],
         invested: 0,
         buff: 0,
         cantrip: 0,
       },
-      summoning: {
-        training: UNTRAINED_STATE[Skill.summoning],
+      stealth: {
+        training: UNTRAINED_STATE[Skill.stealth],
+        invested: 0,
+        buff: 0,
+        cantrip: 0,
+      },
+      sword: {
+        training: UNTRAINED_STATE[Skill.sword],
+        invested: 0,
+        buff: 0,
+        cantrip: 0,
+      },
+      thrown_weapons: {
+        training: UNTRAINED_STATE[Skill.thrown_weapons],
         invested: 0,
         buff: 0,
         cantrip: 0,
@@ -273,8 +267,8 @@ export default function (): Character {
         buff: 0,
         cantrip: 0,
       },
-      void_magic: {
-        training: UNTRAINED_STATE[Skill.void_magic],
+      unarmed_combat: {
+        training: UNTRAINED_STATE[Skill.unarmed_combat],
         invested: 0,
         buff: 0,
         cantrip: 0,

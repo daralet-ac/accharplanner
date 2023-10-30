@@ -5,7 +5,6 @@ import {
   MAX_VITAL_INVESTED,
   MAX_ATTRIBUTE_INVESTED,
   MAX_SKILL_INVESTED_SPECIALIZED,
-  MAX_LEVEL,
 } from "../constants";
 import { maxSkillInvested } from "../helpers";
 import {
