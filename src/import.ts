@@ -27,7 +27,7 @@ export const importCharacter = function (store: Store<State>, json: any) {
 
   // Vitals
   Object.keys(json.vitals).forEach((a) => {
-    store.state.build.character.vitals[a].indvested = 0;
+    store.state.build.character.vitals[a].invested = 0;
     store.state.build.character.vitals[a].invested =
       json.vitals[a].base - store.getters[a + "Base"];
   });
