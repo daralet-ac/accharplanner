@@ -11,10 +11,7 @@ export default {
     context.state.ui.shareStatus = null;
     context.state.ui.sharedBuild = null;
 
-    const supabase = createClient(
-      import.meta.env.VITE_SUPABASE_URL,
-      import.meta.env.VITE_SUPABASE_KEY
-    );
+    const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
 
     // Insert build
     const { data, error } = await supabase
@@ -39,16 +36,10 @@ export default {
       message: "Loading build from share link.. *portal sounds*.",
     });
 
-    const supabase = createClient(
-      import.meta.env.VITE_SUPABASE_URL,
-      import.meta.env.VITE_SUPABASE_KEY
-    );
+    const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
 
     // First try to find a published build, then try to find a shared build
-    const response_official = await supabase
-      .from("official_builds")
-      .select()
-      .eq("id", options.build_id);
+    const response_official = await supabase.from("official_builds").select().eq("id", options.build_id);
 
     // Yoink .data out to make TypeScript happy
     const response_official_data = response_official.data;
@@ -56,12 +47,7 @@ export default {
     if (response_official.error) {
       context.commit("addNotification", {
         type: "error",
-        message:
-          "Failed to load build '" +
-          options.build_id +
-          "' with error '" +
-          response_official.error +
-          "'.",
+        message: "Failed to load build '" + options.build_id + "' with error '" + response_official.error + "'.",
       });
 
       options.router.push("/");
@@ -73,10 +59,7 @@ export default {
     let response_shared_data = null;
 
     if (!response_official_data?.length) {
-      const response_shared = await supabase
-        .from("shared_builds")
-        .select()
-        .eq("id", options.build_id);
+      const response_shared = await supabase.from("shared_builds").select().eq("id", options.build_id);
 
       // Yoink .data out again like above
       response_shared_data = response_shared.data;
@@ -84,12 +67,7 @@ export default {
       if (response_shared.error) {
         context.commit("addNotification", {
           type: "error",
-          message:
-            "Failed to load build '" +
-            options.build_id +
-            "' with error '" +
-            response_shared.error +
-            "'.",
+          message: "Failed to load build '" + options.build_id + "' with error '" + response_shared.error + "'.",
         });
 
         options.router.push("/");
@@ -238,17 +216,12 @@ export default {
     });
   },
   async publishBuild(context: any) {
-    const supabase = createClient(
-      import.meta.env.VITE_SUPABASE_URL,
-      import.meta.env.VITE_SUPABASE_KEY
-    );
+    const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
 
     const { data, error } = await supabase
       .from("official_builds")
       .insert({
-        id: context.state.build.character.name
-          .toLowerCase()
-          .replace(/[^\w]/, "_"),
+        id: context.state.build.character.name.toLowerCase().replace(/[^\w]/, "_"),
         name: context.state.build.character.name,
         description: "To be filled in...",
         content: context.state.build,
@@ -258,10 +231,7 @@ export default {
     if (error) {
       context.commit("addNotification", {
         type: "error",
-        message:
-          "Failed to publish build due to error: " +
-          JSON.stringify(error) +
-          ".",
+        message: "Failed to publish build due to error: " + JSON.stringify(error) + ".",
       });
     }
   },

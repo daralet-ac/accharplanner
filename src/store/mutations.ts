@@ -7,15 +7,7 @@ import {
   MAX_SKILL_INVESTED_SPECIALIZED,
 } from "../constants";
 import { maxSkillInvested } from "../helpers";
-import {
-  State,
-  Race,
-  Gender,
-  Attribute,
-  Vital,
-  Skill,
-  Training,
-} from "../types";
+import { State, Race, Gender, Attribute, Vital, Skill, Training } from "../types";
 import DefaultCharacter from "./DefaultCharacter";
 
 export default {
@@ -43,14 +35,11 @@ export default {
     state.ui.paneVisibility.xp = !state.ui.paneVisibility.xp;
   },
   toggleKnobsAndDialsPane(state: State) {
-    state.ui.paneVisibility.knobsAndDials =
-      !state.ui.paneVisibility.knobsAndDials;
+    state.ui.paneVisibility.knobsAndDials = !state.ui.paneVisibility.knobsAndDials;
   },
   changeStage(state: State, index: number) {
     state.ui.currentStage = index;
-    state.build.character = JSON.parse(
-      JSON.stringify(state.build.stages[index])
-    );
+    state.build.character = JSON.parse(JSON.stringify(state.build.stages[index]));
   },
   saveStage(state: State) {
     state.build.stages.push(JSON.parse(JSON.stringify(state.build.character)));
@@ -156,10 +145,7 @@ export default {
   },
 
   updateAttributeInvested(state: State, payload: any) {
-    state.build.character.attributes[payload.name].invested = Math.min(
-      Number(payload.value),
-      MAX_ATTRIBUTE_INVESTED
-    );
+    state.build.character.attributes[payload.name].invested = Math.min(Number(payload.value), MAX_ATTRIBUTE_INVESTED);
   },
 
   updateAttributeBuff(state: State, payload: any) {
@@ -167,16 +153,11 @@ export default {
   },
 
   updateAttributeCantrip(state: State, payload: any) {
-    state.build.character.attributes[payload.name].cantrip = Number(
-      payload.value
-    );
+    state.build.character.attributes[payload.name].cantrip = Number(payload.value);
   },
 
   updateVitalInvested(state: State, payload: any) {
-    state.build.character.vitals[payload.name].invested = Math.min(
-      Number(payload.value),
-      MAX_VITAL_INVESTED
-    );
+    state.build.character.vitals[payload.name].invested = Math.min(Number(payload.value), MAX_VITAL_INVESTED);
   },
 
   updateSkillInvested(state: State, payload: { name: string; value: number }) {
@@ -224,12 +205,8 @@ export default {
         newTraining = Training.TRAINED;
 
         // Reduce max skill invested to 208 (max for trained) if over
-        if (
-          state.build.character.skills[skill].invested >
-          MAX_SKILL_INVESTED_TRAINED
-        ) {
-          state.build.character.skills[skill].invested =
-            MAX_SKILL_INVESTED_TRAINED;
+        if (state.build.character.skills[skill].invested > MAX_SKILL_INVESTED_TRAINED) {
+          state.build.character.skills[skill].invested = MAX_SKILL_INVESTED_TRAINED;
         }
 
         break;
@@ -263,20 +240,12 @@ export default {
     Object.keys(Skill).forEach((skill) => {
       let newval = Number(invested);
 
-      if (
-        state.build.character.skills[skill].training == Training.SPECIALIZED
-      ) {
+      if (state.build.character.skills[skill].training == Training.SPECIALIZED) {
         state.build.character.skills[skill].invested =
-          newval > MAX_SKILL_INVESTED_SPECIALIZED
-            ? MAX_SKILL_INVESTED_SPECIALIZED
-            : newval;
-      } else if (
-        state.build.character.skills[skill].training == Training.TRAINED
-      ) {
+          newval > MAX_SKILL_INVESTED_SPECIALIZED ? MAX_SKILL_INVESTED_SPECIALIZED : newval;
+      } else if (state.build.character.skills[skill].training == Training.TRAINED) {
         state.build.character.skills[skill].invested =
-          newval > MAX_SKILL_INVESTED_TRAINED
-            ? MAX_SKILL_INVESTED_TRAINED
-            : newval;
+          newval > MAX_SKILL_INVESTED_TRAINED ? MAX_SKILL_INVESTED_TRAINED : newval;
       }
     });
   },
@@ -301,20 +270,10 @@ export default {
     Object.keys(Skill).forEach((skill) => {
       let newval = Number(invested);
 
-      if (
-        state.build.character.skills[skill].training === Training.SPECIALIZED
-      ) {
-        newval =
-          newval > MAX_SKILL_INVESTED_SPECIALIZED
-            ? MAX_SKILL_INVESTED_SPECIALIZED
-            : newval;
-      } else if (
-        state.build.character.skills[skill].training === Training.TRAINED
-      ) {
-        newval =
-          newval > MAX_SKILL_INVESTED_TRAINED
-            ? MAX_SKILL_INVESTED_TRAINED
-            : newval;
+      if (state.build.character.skills[skill].training === Training.SPECIALIZED) {
+        newval = newval > MAX_SKILL_INVESTED_SPECIALIZED ? MAX_SKILL_INVESTED_SPECIALIZED : newval;
+      } else if (state.build.character.skills[skill].training === Training.TRAINED) {
+        newval = newval > MAX_SKILL_INVESTED_TRAINED ? MAX_SKILL_INVESTED_TRAINED : newval;
       } else {
         newval = 0;
       }

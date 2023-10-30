@@ -1,11 +1,4 @@
-import {
-  Attribute,
-  Vital,
-  Skill,
-  Training,
-  StringIndexedDict,
-  NumberIndexedDict,
-} from "./types";
+import { Attribute, Vital, Skill, Training, StringIndexedDict, NumberIndexedDict } from "./types";
 
 export const MIN_LEVEL: number = 1;
 export const MAX_LEVEL: number = 126;
@@ -713,9 +706,7 @@ export const COST_VITAL: NumberIndexedDict<number> = {
 };
 
 // Cost when trained at each level, not cost to train
-export const SKILL_COST_AT_TRAINING: StringIndexedDict<
-  StringIndexedDict<number>
-> = {
+export const SKILL_COST_AT_TRAINING: StringIndexedDict<StringIndexedDict<number>> = {
   [Skill.alchemy]: {
     [Training.TRAINED]: 0,
     [Training.SPECIALIZED]: 0,
