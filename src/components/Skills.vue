@@ -59,7 +59,6 @@
                   <option value="5">V</option>
                   <option value="6">VI</option>
                   <option value="7">VII</option>
-                  <option value="8">VIII</option>
                 </select>
               </th>
               <th>

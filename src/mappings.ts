@@ -104,7 +104,6 @@ export const BUFF_NAME: NumberIndexedDict<string> = {
   5: "V",
   6: "VI",
   7: "VII",
-  8: "VIII",
 };
 
 export const CANTRIP_NAME: NumberIndexedDict<string> = {
