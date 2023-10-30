@@ -3,7 +3,7 @@ import { UNTRAINED_STATE } from "../constants";
 
 export default function (): Character {
   return {
-    name: "An Adventurer",
+    name: "",
     race: "Aluvian",
     gender: "Female",
     level: 1,
