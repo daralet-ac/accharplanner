@@ -80,12 +80,6 @@ export enum Race {
   Aluvian = "Aluvian",
   "Gharu'ndim" = "Gharu'ndim",
   Sho = "Sho",
-  Viamontian = "Viamontian",
-  Empyrean = "Empyrean",
-  Umbraen = "Umbraen",
-  Penumbraen = "Penumbraen",
-  Lugian = "Lugian",
-  Tumerok = "Tumerok",
 }
 
 export enum Gender {
