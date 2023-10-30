@@ -349,6 +349,13 @@ ul {
   overflow-y: auto;
 }
 
+.pane .skills-table-wrapper {
+  padding: 0rem 0.5rem;
+  border-top: 1px solid var(--c-border);
+  max-height: 80rem;
+  overflow-y: auto;
+}
+
 .pane .table-wrapper ul {
   margin: 0.5rem 0;
 }

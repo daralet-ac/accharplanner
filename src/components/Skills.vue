@@ -13,7 +13,7 @@
           >
         </div>
       </div>
-      <div v-if="collapsed" class="table-wrapper">
+      <div v-if="collapsed" class="skills-table-wrapper">
         <table>
           <thead>
             <tr class="table-header">
